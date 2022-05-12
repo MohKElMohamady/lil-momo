@@ -1,2 +1,28 @@
-
-<router-outlet></router-outlet>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">
+    <img class="logo" src="../assets/logo.png" [style.width.px]="100" alt="">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Our Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]=""> <shopping-cart></shopping-cart> </a> 
+      </li>
+    </ul>
+  </div>
+</nav>
+<!-- <home></home> -->
+<products-shell></products-shell>
+<!-- <product-card></product-card> -->
+<!-- <router-outlet></router-outlet> -->

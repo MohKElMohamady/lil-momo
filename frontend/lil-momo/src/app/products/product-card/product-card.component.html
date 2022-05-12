@@ -1,0 +1,22 @@
+<div class="card" style="width: 18rem">
+  <img [src]="product.imageUrl" class="card-img-top" [alt]="product.name" />
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+    <p class="card-text">
+      
+    </p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Name :{{product.name}}</li>
+    <li class="list-group-item">Left: {{product.stock}}</li>
+    <li class="list-group-item">Manufacturer : {{product.manufacturer}}</li>
+    <li class="list-group-item">Price : {{product.price}}</li>
+  </ul>
+  <div class="card-body">
+    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+      <button type="button" class="btn btn-danger" (click)="removeProductFromCart()">-</button>
+      <button type="button" class="btn btn-warning" (click)="displayProduct()">I want to know to know more!</button>
+      <button type="button" class="btn btn-success" (click)="addProductIntoCart()">+</button>
+    </div>
+  </div>
+</div>
