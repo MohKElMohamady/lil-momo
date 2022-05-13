@@ -38,10 +38,6 @@ export class ProductsShellComponent implements OnInit {
   public removeProductFromCart(product : Product) {
     console.log(`remove product from shell ${product}`);
     this.store.dispatch(ShoppingCartActions.removeProductFromCart({product}));
-    let myNewShit$ = this.store.select(ShoppingCartSelectors.shoppingCartFeatureSelector);
-    myNewShit$.pipe(
-      map(shit => console.log(shit))
-    ).subscribe();
   }
 
 
