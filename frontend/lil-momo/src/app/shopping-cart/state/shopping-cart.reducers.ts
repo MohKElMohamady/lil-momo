@@ -48,17 +48,45 @@ export const shoppingCartReducers = createReducer(initialState,
         }
     }),
     /*
-     * This action is responsible for removiing a product from the cart
+     * This action is responsible for incrementing the price in the cart, gets triggered by the effect after listening 
+     * for an action of type addProductToCart
+     */
+    on(ShoppingCartActions.incrementTotalPriceInCart, (state,action) : ShoppingCartState => {
+        console.log(`The price to be added is`, action.product.price);
+        console.log(`The total price before updating is`, state.totalCostOfProducts);
+        let updatedTotalCostOfProducts  = state.totalCostOfProducts + action.product.price;
+        console.log(`The total price to be added is`, updatedTotalCostOfProducts);
+        return {
+            ...state,
+            totalCostOfProducts : updatedTotalCostOfProducts
+        }
+    }),
+    /*
+     * This action is responsible for removing a product out of the cart
      */
     on(ShoppingCartActions.removeProductFromCart, (state, action) : ShoppingCartState => {
         let updatedProductsToBePurchased: Map<string, number> = state.productsToBePurchased;
         /*
-         * We need to check if the product already exists in the cart
+         * The logic of removing the products from a cart:
+         * We need to check if the product already exists in the cart, if it does there are two options:
+         * There are more than one occurnces of that product in the cart,  we will decrement it by one.
+         * There is only ONE occurence of the product in the cart, we will delete its presence from the map
+         * If it does not exist
          */
         if (updatedProductsToBePurchased.has(action.product.id)) {
             let numberOfPieces = updatedProductsToBePurchased.get(action.product.id);
+
+            if(numberOfPieces == 1){
+                updatedProductsToBePurchased.delete(action.product.id);
+                let updatedTotalProductsInCart = state.totalProductsInCart - 1;
+                return {
+                    ...state,
+                    productsToBePurchased : updatedProductsToBePurchased,
+                    totalProductsInCart : updatedTotalProductsInCart
+                }
+            }
             updatedProductsToBePurchased.set(action.product.id, (numberOfPieces as number) - 1);
-            let updatedTotalProductsInCart = state.totalProductsInCart + 1;
+            let updatedTotalProductsInCart = state.totalProductsInCart - 1;
             return {
                 ...state,
                 productsToBePurchased: updatedProductsToBePurchased,
@@ -68,11 +96,20 @@ export const shoppingCartReducers = createReducer(initialState,
             return {
                 ...state,
                 productsToBePurchased: updatedProductsToBePurchased,
-                totalProductsInCart : state.totalProductsInCart--
             }
         }    
         return {
             ...state
+        }
+    }),
+    /*
+     * This action is responsible for decrementing the price in the cart, gets triggered by the effect after listening 
+     * for an action of type removeProductFromCart 
+     */
+    on(ShoppingCartActions.decrementTotalPriceInCart, (state, action) : ShoppingCartState => {
+        return {
+            ...state,
+            totalCostOfProducts : state.totalCostOfProducts - action.product.price
         }
     }),
     /*
@@ -100,15 +137,6 @@ export const shoppingCartReducers = createReducer(initialState,
             }
         }
     }),
-    /*
-     * We are adding the price 
-     */
-    on(ShoppingCartActions.incrementTotalPriceInCart, (state,action) : ShoppingCartState => {
-        return {
-            ...state,
-            totalCostOfProducts : state.totalCostOfProducts + action.product.price
-        }
-    }),
     on(ShoppingCartActions.clearCart, (state, action) : ShoppingCartState => {
         let updatedProductsToBePurchased : Map<string, number> = new Map(state.productsToBePurchased);
         updatedProductsToBePurchased.clear();
@@ -118,7 +146,7 @@ export const shoppingCartReducers = createReducer(initialState,
             totalCostOfProducts : 0,
             totalProductsInCart : 0
         }
-    })
+    }),
     );
 
 /* export const shoppingCartReducers = createReducer(

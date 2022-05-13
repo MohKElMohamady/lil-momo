@@ -13,8 +13,6 @@ export class RimService {
 
 
     public getRims() : Observable<Rim[]> {
-        console.log("hellO!");
-        
         return this.httpClient.get<Rim[]>(this.url);
     }
 
