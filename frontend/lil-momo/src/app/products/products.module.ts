@@ -9,20 +9,26 @@ import { EffectsModule } from '@ngrx/effects';
 import { ProductsEffects } from './state/products.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreDevtools } from '@ngrx/store-devtools';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes : Routes = [
+  {path : '', component : ProductsShellComponent}
+];
 
 @NgModule({
+  
   declarations: [
     ProductsShellComponent,
     ProductCardComponent,
     ProductsSafeHouseComponent
   ],
-  exports : [ProductsShellComponent],
+  exports : [],
   imports: [
     CommonModule,
     HttpClientModule,
     StoreModule.forFeature("products", productsReducer),
     EffectsModule.forFeature([ProductsEffects]),
-    
+    RouterModule.forChild(routes)  
   ],
   
 })
