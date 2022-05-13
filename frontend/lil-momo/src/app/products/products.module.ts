@@ -10,6 +10,7 @@ import { ProductsEffects } from './state/products.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreDevtools } from '@ngrx/store-devtools';
 import { RouterModule, Routes } from '@angular/router';
+import { ProductContainerComponent } from './product-container/product-container.component';
 
 const routes : Routes = [
   {path : '', component : ProductsShellComponent}
@@ -20,7 +21,8 @@ const routes : Routes = [
   declarations: [
     ProductsShellComponent,
     ProductCardComponent,
-    ProductsSafeHouseComponent
+    ProductsSafeHouseComponent,
+    ProductContainerComponent
   ],
   exports : [],
   imports: [
