@@ -1,1 +1,6 @@
-<products-safe-house [products]="products$ | async"></products-safe-house>
+<products-safe-house
+  [products]="products$ | async"
+  (showProduct)="displayProduct($event)"
+  (addProductIntoCartEvent)="addProductIntoCart($event)"
+  (removeProductFromCartEvent)="removeProductFromCart($event)"
+></products-safe-house>

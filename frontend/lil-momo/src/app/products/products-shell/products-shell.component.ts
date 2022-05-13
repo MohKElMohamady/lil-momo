@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import * as ProductsSelectors from '../state/products.selectors';
 import * as ProductsActions from '../state/products.actions';
 import { ProductsState } from '../state/products.state';
-
+import * as ShoppingCartActions from '../../shopping-cart/state/shopping-cart.actions';
+import * as ShoppingCartSelectors from '../../shopping-cart/state/shopping-cart.selectors';
 @Component({
   selector: 'products-shell',
   templateUrl: './products-shell.component.html',
@@ -23,5 +24,25 @@ export class ProductsShellComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+  public displayProduct(product : Product) {
+    console.log(`display product from shell ${product}`);
+    
+  }
+
+  public addProductIntoCart(product : Product) {
+    console.log(`add product from shell ${product}`);
+    this.store.dispatch(ShoppingCartActions.addProductToCart({product}));
+  }
+
+  public removeProductFromCart(product : Product) {
+    console.log(`remove product from shell ${product}`);
+    this.store.dispatch(ShoppingCartActions.removeProductFromCart({product}));
+    let myNewShit$ = this.store.select(ShoppingCartSelectors.shoppingCartFeatureSelector);
+    myNewShit$.pipe(
+      map(shit => console.log(shit))
+    ).subscribe();
+  }
+
 
 }
