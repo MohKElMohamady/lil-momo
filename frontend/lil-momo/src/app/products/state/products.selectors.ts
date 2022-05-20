@@ -9,3 +9,4 @@ export const productsSelector = createSelector(productsFeatureSelector, state =>
 
 export const productSelector = (productId : string) => 
     createSelector(productsFeatureSelector, state => state.products.find((product) => productId === product.id));
+    
