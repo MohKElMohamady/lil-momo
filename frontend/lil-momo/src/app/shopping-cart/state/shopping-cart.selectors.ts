@@ -22,7 +22,15 @@ export const selectProductsToBePurchased = createSelector(
   (state) => state.productsToBePurchased
 );
 /*
+ * I have to documented this because this might be needed later for complex functionality/situations of NgRx
  * Using a selector from another state to use it in another state but first we have to provide the feature selector of state x
+ * Basically what the logic here is, that I am using the selector from the products state to retrieve all of the products
+   stored in the store/ slice state of products
+ * By passing the feature state to the selector in the parameters of the create selector function, we will be able to access
+   the products in the projector, and hence by using the map (already provided in the shopping cart state that we are in),
+   We will be able to filter the products and retrieve them easily.
+ * After fetching all of the products from the products slice of state, we will be creating a new array of a wrapper class
+   that has the product and how much it was added ProductToBePurchased
  * https://stackoverflow.com/questions/16507866/iterate-through-a-map-in-javascript
  * https://stackoverflow.com/questions/43257027/ngrx-combine-two-selectors
  */
