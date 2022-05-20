@@ -19,6 +19,7 @@ import { ContactComponent } from './contact/contact.component';
     HomeComponent,
     PageNotFoundComponent,
     ContactComponent,
+    
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,6 @@
-<p>shopping-cart-shell works!</p>
+<shopping-cart-show-off
+  [productsToBePurchased]="productsToBePurchased$ | async"
+  [totalCostOfProducts]="totalCostOfProducts$ | async"
+  (addProductIntoCartEvent)="addProductIntoCart($event)"
+  (removeProductFromCartEvent)="removeProductFromCart($event)"
+></shopping-cart-show-off>

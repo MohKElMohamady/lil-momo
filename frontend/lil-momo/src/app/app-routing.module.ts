@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 const routes: Routes = [
   {path : "home", component : HomeComponent},
   {path : "products", loadChildren : () => import('./products/products.module').then(m => m.ProductsModule)},
+  {path : "cart", loadChildren : () => import('./shopping-cart/shopping-cart.module').then(m => m.ShoppingCartModule)},
   {path : "contact", component : ContactComponent},
   {path : "", redirectTo : "home", pathMatch : "full"},
   {path : "**", component :  PageNotFoundComponent}

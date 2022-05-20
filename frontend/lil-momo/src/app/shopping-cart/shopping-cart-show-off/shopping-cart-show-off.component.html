@@ -1,1 +1,65 @@
-<p>shopping-cart-show-off works!</p>
+<div *ngIf="productsToBePurchased?.length == 0">
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="col-7">
+      <div class="card bg-dark text-white">
+        <img src="../../../assets/images/utilities/checkout.jpg" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <h5 class="card-title">Your shopping cart is empty!</h5>
+          <p class="card-text">Add some products to your cart</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="productsToBePurchased?.length">
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="col-7">
+      <div class="card bg-dark text-white">
+        <img src="../../../assets/images/utilities/checkout.jpg" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <h5 class="card-title">Thank you for choosing Lil Momo!</h5>
+          <p class="card-text">The total of your purchases is: {{totalCostOfProducts}}</p>
+          <p class="card-text">For more detailed view of your shopping cart, take a look below:</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngFor="let productToBePurchased of productsToBePurchased">
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="col-5">
+      <div class="card mb-3 text-center" style="max-width: 540px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img [src]="productToBePurchased.product.imageUrl" class="img-fluid rounded-start" [alt]="productToBePurchased.product.imageUrl">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{productToBePurchased.product.name}}</h5>
+                <p class="card-text">{{productToBePurchased.product.description}}</p>
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                  <button type="button" class="btn btn-outline-danger" (click)="removeProductFromCart(productToBePurchased.product)">-</button>
+                  <button type="button" class="btn btn-outline-warning">Total price of {{productToBePurchased.product.name}} : {{productToBePurchased.product.price * productToBePurchased.amount}} with amount {{productToBePurchased.amount}}</button>
+                  <button type="button" class="btn btn-outline-success" (click)="addProductIntoCart(productToBePurchased.product)">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>
