@@ -11,9 +11,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreDevtools } from '@ngrx/store-devtools';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductContainerComponent } from './product-container/product-container.component';
+import { ProductPresentationComponent } from './product-presentation/product-presentation.component';
 
 const routes : Routes = [
-  {path : '', component : ProductsShellComponent}
+  {path : '', component : ProductsShellComponent},
+  {path : ':id', component : ProductContainerComponent}
 ];
 
 @NgModule({
@@ -22,7 +24,8 @@ const routes : Routes = [
     ProductsShellComponent,
     ProductCardComponent,
     ProductsSafeHouseComponent,
-    ProductContainerComponent
+    ProductContainerComponent,
+    ProductPresentationComponent
   ],
   exports : [],
   imports: [

@@ -7,6 +7,7 @@ import * as ProductsActions from '../state/products.actions';
 import { ProductsState } from '../state/products.state';
 import * as ShoppingCartActions from '../../shopping-cart/state/shopping-cart.actions';
 import * as ShoppingCartSelectors from '../../shopping-cart/state/shopping-cart.selectors';
+import { Router } from '@angular/router';
 @Component({
   selector: 'products-shell',
   templateUrl: './products-shell.component.html',
@@ -16,7 +17,7 @@ export class ProductsShellComponent implements OnInit {
   
   public products$!: Observable<Product[]>;
   
-  constructor(private store : Store<ProductsState>) { 
+  constructor(private store : Store<ProductsState>, private router : Router) { 
     this.store.dispatch(ProductsActions.initializeProducts());
     this.products$ = this.store.select(ProductsSelectors.productsSelector);
   }
@@ -26,8 +27,7 @@ export class ProductsShellComponent implements OnInit {
   }
 
   public displayProduct(product : Product) {
-    console.log(`display product from shell ${product}`);
-    
+    this.router.navigate(['products', product.id]);
   }
 
   public addProductIntoCart(product : Product) {
